@@ -31,6 +31,7 @@ __pycache__/
 */.ipynb_checkpoints/*.ipynb
 */.DS_Store
 .DS_Store
+.idea/
 
 # Distribution / packaging
 .Python
