@@ -17,9 +17,6 @@ from utils import (encode_dataset, iter_data,
                    ResultLogger, make_path)
 from loss import MultipleChoiceLossCompute
 
-os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
-os.environ["CUDA_VISIBLE_DEVICES"] = "1"
-
 def transform_roc(X1, X2, X3):
     n_batch = len(X1)
     xmb = np.zeros((n_batch, 2, n_ctx, 2), dtype=np.int32)
@@ -140,16 +137,16 @@ label_decoders = {
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--desc', type=str, help="Description", default='rocstories')
-    parser.add_argument('--dataset', type=str, default='rocstories')
+    parser.add_argument('--desc', type=str, help="Description")
+    parser.add_argument('--dataset', type=str)
     parser.add_argument('--log_dir', type=str, default='log/')
     parser.add_argument('--save_dir', type=str, default='save/')
     parser.add_argument('--data_dir', type=str, default='data/')
     parser.add_argument('--submission_dir', type=str, default='submission/')
-    parser.add_argument('--submit', action='store_true', default=True)
-    parser.add_argument('--analysis', action='store_true', default=True)
+    parser.add_argument('--submit', action='store_true')
+    parser.add_argument('--analysis', action='store_true')
     parser.add_argument('--seed', type=int, default=42)
-    parser.add_argument('--n_iter', type=int, default=5)
+    parser.add_argument('--n_iter', type=int, default=3)
     parser.add_argument('--n_batch', type=int, default=8)
     parser.add_argument('--max_grad_norm', type=int, default=1)
     parser.add_argument('--lr', type=float, default=6.25e-5)
@@ -234,8 +231,7 @@ if __name__ == '__main__':
     n_updates_total = (n_train // n_batch_train) * args.n_iter
 
     dh_model = DoubleHeadModel(args, clf_token, 'multiple_choice', vocab, n_ctx)
-    for name, Parameter in dh_model.named_parameters():
-        print(name, Parameter)
+
     criterion = nn.CrossEntropyLoss(reduce=False)
     model_opt = OpenAIAdam(dh_model.parameters(),
                            lr=args.lr,
