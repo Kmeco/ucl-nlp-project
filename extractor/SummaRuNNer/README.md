@@ -39,6 +39,10 @@ python main.py -device 0 -batch_size 1 -test -load_dir checkpoints/XXX.pt
 python main.py -batch_size 1 -predict -filename x.txt -load_dir checkpoints/RNN_RNN_seed_1.pt
 ```
 
+To get the extracted txt from each articles use the test option above and add the `-test_dir` option
+specifying the json file on which to run the extraction. Eliminate the device option if you don't have
+an usable GPU.
+
 ## pretrained models
 
 1. RNN_RNN(`checkpoints/RNN_RNN_seed_1.pt`)
