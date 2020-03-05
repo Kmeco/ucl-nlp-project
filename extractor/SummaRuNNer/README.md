@@ -2,10 +2,6 @@
 
 [![License](https://img.shields.io/badge/license-MIT-000000.svg)](https://opensource.org/licenses/MIT)
 
-### Statement
-
-+ **Not the official implementation! Just For Learning and communication!**
-
 ### Models
 
 1. RNN_RNN
@@ -42,6 +38,7 @@ python main.py -device 0 -batch_size 1 -test -load_dir checkpoints/XXX.pt
 # predict
 python main.py -batch_size 1 -predict -filename x.txt -load_dir checkpoints/RNN_RNN_seed_1.pt
 ```
+
 ## pretrained models
 
 1. RNN_RNN(`checkpoints/RNN_RNN_seed_1.pt`)
@@ -59,22 +56,12 @@ python main.py -batch_size 1 -predict -filename x.txt -load_dir checkpoints/RNN_
 |CNN-RNN|25.8|11.3|13.8|
 |Hierarchical Attn Net|26.0|11.4|13.8|
 
-### Blog
+### Download Data: 
 
-+ [用PyTorch搭建抽取式摘要系统](http://mp.weixin.qq.com/s/9X77MPcQOQPwZaOVIVfo9Q)
-
-### Download Data:  
-
-+ 百度云:[https://pan.baidu.com/s/1LV3iuuH1NjxuAJd0iz14lA](https://pan.baidu.com/s/1LV3iuuH1NjxuAJd0iz14lA) 密码:`ivzl`
-
+Download this folder and paste its content in the data folder in the current directory. It contains the pretrained 
+embeddings, word2id, and dailymail train/test/val json splits.
 + Google Driver:[data.tar.gz](https://drive.google.com/file/d/1JgsboIAs__r6XfCbkDWgmberXJw8FBWE/view?usp=sharing)
-
-+ Source Data:[Neural Summarization by Extracting Sentences and Words](https://docs.google.com/uc?id=0B0Obe9L1qtsnSXZEd0JCenIyejg&export=download)
 
 ### Evaluation
 
 + [Tools](https://github.com/hpzhao/nlp-metrics)
-
-### Acknowledge
-
-+ Thanks for @[AlJohri](https://github.com/AlJohri)'s and @[500swapnil](https://github.com/500swapnil)'s contribution
