@@ -56,12 +56,6 @@ python main.py -batch_size 1 -predict -filename x.txt -load_dir checkpoints/RNN_
 |CNN-RNN|25.8|11.3|13.8|
 |Hierarchical Attn Net|26.0|11.4|13.8|
 
-### Download Data: 
-
-Download this folder and paste its content in the data folder in the current directory. It contains the pretrained 
-embeddings, word2id, and dailymail train/test/val json splits.
-+ Google Driver:[data.tar.gz](https://drive.google.com/file/d/1JgsboIAs__r6XfCbkDWgmberXJw8FBWE/view?usp=sharing)
-
 ### Evaluation
 
 + [Tools](https://github.com/hpzhao/nlp-metrics)
