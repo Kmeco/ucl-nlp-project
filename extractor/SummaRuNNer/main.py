@@ -168,7 +168,7 @@ def test():
                             batch_size=args.batch_size,
                             shuffle=False)
     if use_gpu:
-        checkpoint = torch.load(args.load_dir)
+        checkpoint = torch.load(args.load_dir, map_location=lambda storage, loc: storage)
     else:
         checkpoint = torch.load(args.load_dir, map_location=lambda storage, loc: storage)
 
