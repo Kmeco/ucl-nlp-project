@@ -17,6 +17,9 @@ def tokenize_csv(csv_file):
     if not os.path.exists(tokenized_csv):
         wikihow_df = pd.read_csv(csv_file)
         wikihow_df = wikihow_df[wikihow_df['text'].isna() == False]
+        print(wikihow_df.shape)
+        wikihow_df = wikihow_df[wikihow_df['text'].apply(len) > wikihow_df['headline'].apply(len)]
+        print(wikihow_df.shape)
         # Change conditioning substructure here by redefining or adding conditioning function
         wikihow_df['conditioning'] = conditioning_hyp1(wikihow_df)
         wikihow_df_c1 = wikihow_df.drop(['title', 'text'], axis=1)

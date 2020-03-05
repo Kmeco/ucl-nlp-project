@@ -197,6 +197,8 @@ def test():
         start = 0
         for doc_id,doc_len in enumerate(doc_lens):
             stop = start + doc_len
+            print(start, stop)
+            print(probs.size)
             prob = probs[start:stop]
             topk = min(args.topk,doc_len)
             topk_indices = prob.topk(topk)[1].cpu().data.numpy()
