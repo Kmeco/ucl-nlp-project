@@ -196,22 +196,21 @@ def test():
         time_cost += t2 - t1
         start = 0
         for doc_id,doc_len in enumerate(doc_lens):
-            stop = start + doc_len
-            print(start, stop)
-            print(probs.size)
-            prob = probs[start:stop]
-            topk = min(args.topk,doc_len)
-            topk_indices = prob.topk(topk)[1].cpu().data.numpy()
-            topk_indices.sort()
-            doc = batch['doc'][doc_id].split('\n')[:doc_len]
-            hyp = [doc[index] for index in topk_indices]
-            ref = summaries[doc_id]
-            with open(os.path.join(args.ref,str(file_id)+'.txt'), 'w') as f:
-                f.write(ref)
-            with open(os.path.join(args.hyp,str(file_id)+'.txt'), 'w') as f:
-                f.write('\n'.join(hyp))
-            start = stop
-            file_id = file_id + 1
+            if doc_len != 1:
+                stop = start + doc_len
+                prob = probs[start:stop]
+                topk = min(args.topk,doc_len)
+                topk_indices = prob.topk(topk)[1].cpu().data.numpy()
+                topk_indices.sort()
+                doc = batch['doc'][doc_id].split('\n')[:doc_len]
+                hyp = [doc[index] for index in topk_indices]
+                ref = summaries[doc_id]
+                with open(os.path.join(args.ref,str(file_id)+'.txt'), 'w') as f:
+                    f.write(ref)
+                with open(os.path.join(args.hyp,str(file_id)+'.txt'), 'w') as f:
+                    f.write('\n'.join(hyp))
+                start = stop
+                file_id = file_id + 1
     print('Speed: %.2f docs / s' % (doc_num / time_cost))
 
 

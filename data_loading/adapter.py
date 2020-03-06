@@ -4,6 +4,7 @@ import nltk
 import argparse
 import json
 import os
+import re
 
 from sklearn.model_selection import train_test_split
 
@@ -11,6 +12,20 @@ from sklearn.model_selection import train_test_split
 """Add here incrementally new conditioning hypothesis, increment the final subscript"""
 def conditioning_hyp1(df):
     return df['title'] + " $ " + df['text']
+
+import string as strng
+
+def erase_leading_punctuation(string):
+  for i in range(len(string)):
+    if not string[i] in strng.punctuation and not string[i]== ' ':
+      return string[i:]
+
+
+def formatter(string):
+    string = re.sub(r'^https?:\/\/.*[\r\n]*', '', string, flags=re.MULTILINE)
+    lst = string.lower().replace('."', '"').replace('u.s.','us').replace('e.g.','eg').replace('\n', '').split('.')
+    inter = "\n".join([" ".join(nltk.word_tokenize(erase_leading_punctuation(s))) for s in lst if s != '' and erase_leading_punctuation(s)!=None])
+    return inter
 
 def tokenize_csv(csv_file):
     tokenized_csv = csv_file.replace('.csv', '')+'_tokenized.csv'
@@ -28,7 +43,7 @@ def tokenize_csv(csv_file):
         nltk.download('punkt')
 
         # Remove empty lines
-        wikihow_df_c1 = wikihow_df_c1.applymap(lambda x: " \n ".join([" ".join(nltk.word_tokenize(line)) for line in x.split('\n') if line != '']))
+        wikihow_df_c1 = wikihow_df_c1.applymap(lambda x: formatter(x))
 
         wikihow_df_c1.to_csv(tokenized_csv)
         print("Successfully finished tokenizing {} to {}.\n".format(
