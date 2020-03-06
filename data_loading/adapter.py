@@ -11,7 +11,7 @@ from sklearn.model_selection import train_test_split
 
 """Add here incrementally new conditioning hypothesis, increment the final subscript"""
 def conditioning_hyp1(df):
-    return df['title'] + " $ " + df['text']
+    return df['text']
 
 import string as strng
 
